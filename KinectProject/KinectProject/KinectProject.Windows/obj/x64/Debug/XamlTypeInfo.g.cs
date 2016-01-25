@@ -124,15 +124,21 @@ namespace KinectProject.KinectProject_Windows_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[3];
+            _typeNameTable = new string[6];
             _typeNameTable[0] = "KinectProject.MainPage";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
+            _typeNameTable[3] = "String";
+            _typeNameTable[4] = "WindowsPreview.Kinect.FrameDescription";
+            _typeNameTable[5] = "Object";
 
-            _typeTable = new global::System.Type[3];
+            _typeTable = new global::System.Type[6];
             _typeTable[0] = typeof(global::KinectProject.MainPage);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
+            _typeTable[3] = typeof(global::System.String);
+            _typeTable[4] = typeof(global::WindowsPreview.Kinect.FrameDescription);
+            _typeTable[5] = typeof(global::System.Object);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -182,6 +188,8 @@ namespace KinectProject.KinectProject_Windows_XamlTypeInfo
             case 0:   //  KinectProject.MainPage
                 userType = new global::KinectProject.KinectProject_Windows_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.Activator = Activate_0_MainPage;
+                userType.AddMemberName("StatusText");
+                userType.AddMemberName("CurrentFrameDescription");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -193,16 +201,66 @@ namespace KinectProject.KinectProject_Windows_XamlTypeInfo
             case 2:   //  Windows.UI.Xaml.Controls.UserControl
                 xamlType = new global::KinectProject.KinectProject_Windows_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
+
+            case 3:   //  String
+                xamlType = new global::KinectProject.KinectProject_Windows_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 4:   //  WindowsPreview.Kinect.FrameDescription
+                userType = new global::KinectProject.KinectProject_Windows_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.SetIsReturnTypeStub();
+                xamlType = userType;
+                break;
+
+            case 5:   //  Object
+                xamlType = new global::KinectProject.KinectProject_Windows_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
             }
             return xamlType;
         }
 
 
+        private object get_0_MainPage_StatusText(object instance)
+        {
+            var that = (global::KinectProject.MainPage)instance;
+            return that.StatusText;
+        }
+        private void set_0_MainPage_StatusText(object instance, object Value)
+        {
+            var that = (global::KinectProject.MainPage)instance;
+            that.StatusText = (global::System.String)Value;
+        }
+        private object get_1_MainPage_CurrentFrameDescription(object instance)
+        {
+            var that = (global::KinectProject.MainPage)instance;
+            return that.CurrentFrameDescription;
+        }
+        private void set_1_MainPage_CurrentFrameDescription(object instance, object Value)
+        {
+            var that = (global::KinectProject.MainPage)instance;
+            that.CurrentFrameDescription = (global::WindowsPreview.Kinect.FrameDescription)Value;
+        }
 
         private global::Windows.UI.Xaml.Markup.IXamlMember CreateXamlMember(string longMemberName)
         {
             global::KinectProject.KinectProject_Windows_XamlTypeInfo.XamlMember xamlMember = null;
-            // No Local Properties
+            global::KinectProject.KinectProject_Windows_XamlTypeInfo.XamlUserType userType;
+
+            switch (longMemberName)
+            {
+            case "KinectProject.MainPage.StatusText":
+                userType = (global::KinectProject.KinectProject_Windows_XamlTypeInfo.XamlUserType)GetXamlTypeByName("KinectProject.MainPage");
+                xamlMember = new global::KinectProject.KinectProject_Windows_XamlTypeInfo.XamlMember(this, "StatusText", "String");
+                xamlMember.Getter = get_0_MainPage_StatusText;
+                xamlMember.Setter = set_0_MainPage_StatusText;
+                break;
+            case "KinectProject.MainPage.CurrentFrameDescription":
+                userType = (global::KinectProject.KinectProject_Windows_XamlTypeInfo.XamlUserType)GetXamlTypeByName("KinectProject.MainPage");
+                xamlMember = new global::KinectProject.KinectProject_Windows_XamlTypeInfo.XamlMember(this, "CurrentFrameDescription", "WindowsPreview.Kinect.FrameDescription");
+                xamlMember.Getter = get_1_MainPage_CurrentFrameDescription;
+                xamlMember.Setter = set_1_MainPage_CurrentFrameDescription;
+                break;
+            }
             return xamlMember;
         }
     }
@@ -527,5 +585,6 @@ namespace KinectProject.KinectProject_Windows_XamlTypeInfo
         }
     }
 }
+
 
 
